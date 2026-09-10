@@ -1,0 +1,11 @@
+GRÁFICOS GOLD — TRÊS ANOS
+
+Entrada: C:\Users\joaop\Downloads\run-1788912744607-part-r-00000
+Saída: C:\Users\joaop\OneDrive\Área de Trabalho\FIAP\Fase 3\graficos_gold_3_anos\saidas
+Anos analisados: 2023, 2024 e 2025
+Respostas únicas: 14002
+Motor de dados: PySpark (Spark local)
+Renderização: Pillow
+
+Cada gráfico tem um script próprio. O arquivo gerar_todos.py executa todos.
+A AWS não é alterada por estes scripts locais.
