@@ -102,7 +102,7 @@ def carregar_dados_spark(
     spark: SparkSession,
     caminho: Path | None = None,
 ) -> DataFrame:
-    """Lê a Silver CSV e aplica a preparação comum aos três anos."""
+    """Lê a Silver CSV e aplica a preparação comum às três edições."""
     entrada = caminho or INPUT_PADRAO
     if not entrada.exists():
         raise FileNotFoundError(f"CSV não encontrado: {entrada}")
@@ -176,6 +176,47 @@ def quantidade_respostas(df: DataFrame) -> int:
     return df.count()
 
 
+def respondentes_por_ano(df: DataFrame) -> dict[int, int]:
+    """Retorna o volume acumulado de respostas únicas por edição."""
+    return {
+        int(linha["ano_pesquisa"]): int(linha["quantidade"])
+        for linha in (
+            df.groupBy("ano_pesquisa")
+            .count()
+            .withColumnRenamed("count", "quantidade")
+            .orderBy("ano_pesquisa")
+            .collect()
+        )
+    }
+
+
+def totais_por_ano(
+    df: DataFrame,
+    coluna: str,
+    normalizador: Callable[[str | Column], Column] | None = None,
+    excluir: Iterable[str] = (),
+) -> dict[int, int]:
+    """Conta respostas válidas por edição para formar denominadores comparáveis."""
+    resultado = {ano: 0 for ano in anos(df)}
+    if coluna not in df.columns:
+        return resultado
+
+    categoria = normalizador(F.col(coluna)) if normalizador else texto_col(coluna)
+    base = df.select("ano_pesquisa", categoria.alias("categoria")).filter(F.col("categoria") != "")
+    excluir_lista = list(excluir)
+    if excluir_lista:
+        base = base.filter(~F.col("categoria").isin(*excluir_lista))
+
+    for linha in (
+        base.groupBy("ano_pesquisa")
+        .count()
+        .withColumnRenamed("count", "quantidade")
+        .collect()
+    ):
+        resultado[int(linha["ano_pesquisa"])] = int(linha["quantidade"])
+    return resultado
+
+
 def padronizar_funcao_col(coluna: str | Column) -> Column:
     s = normalizar_col(coluna)
     return (
@@ -228,16 +269,25 @@ def padronizar_regiao_col(coluna: str | Column) -> Column:
 
 def padronizar_salario_col(coluna: str | Column) -> Column:
     s = normalizar_col(coluna)
+    primeiro_valor = F.regexp_replace(
+        F.regexp_extract(s, r"(\d{1,3}(?:\.\d{3})?)", 1),
+        r"\.",
+        "",
+    ).cast("int")
+    acima_de_20_mil = s.contains("acima de") & (primeiro_valor >= 20000)
     return (
         F.when(s == "", "Não informado")
-        .when(s.contains("ate r$ 2.000") | s.contains("ate 2.000"), "Até R$ 2 mil")
-        .when(s.contains("2.001") & s.contains("4.000"), "R$ 2 a 4 mil")
-        .when(s.contains("4.001") & s.contains("6.000"), "R$ 4 a 6 mil")
-        .when(s.contains("6.001") & s.contains("8.000"), "R$ 6 a 8 mil")
-        .when(s.contains("8.001") & s.contains("12.000"), "R$ 8 a 12 mil")
-        .when(s.contains("12.001") & s.contains("16.000"), "R$ 12 a 16 mil")
-        .when(s.contains("16.001") & s.contains("20.000"), "R$ 16 a 20 mil")
-        .when(s.contains("acima de 20.000"), "Acima de R$ 20 mil")
+        # A base original divide algumas faixas em intervalos menores
+        # (por exemplo, 2.001–3.000 e 3.001–4.000). O primeiro valor
+        # numérico permite consolidar todos esses intervalos corretamente.
+        .when(acima_de_20_mil | (primeiro_valor > 20000), "Acima de R$ 20 mil")
+        .when(primeiro_valor <= 2000, "Até R$ 2 mil")
+        .when(primeiro_valor <= 4000, "R$ 2 a 4 mil")
+        .when(primeiro_valor <= 6000, "R$ 4 a 6 mil")
+        .when(primeiro_valor <= 8000, "R$ 6 a 8 mil")
+        .when(primeiro_valor <= 12000, "R$ 8 a 12 mil")
+        .when(primeiro_valor <= 16000, "R$ 12 a 16 mil")
+        .when(primeiro_valor <= 20000, "R$ 16 a 20 mil")
         .otherwise(F.substring(texto_col(coluna), 1, 22))
     )
 

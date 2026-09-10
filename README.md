@@ -1,7 +1,21 @@
-# Gráficos Gold — três anos com PySpark
+# Gráficos Gold — três edições com PySpark
 
 Esta pasta contém os scripts locais da camada Gold. Eles leem o CSV exportado
-da Silver e comparam 2023, 2024 e 2025.
+da Silver e analisam 2023, 2024 e a edição 2025–2026, cuja coleta ainda está
+em andamento.
+
+## Regra de leitura dos períodos
+
+2023 e 2024 são edições encerradas. O arquivo registra a edição em andamento
+como `ano_pesquisa = 2025`, mas ela deve ser apresentada como **2025–2026
+(parcial)**. Por isso:
+
+- o gráfico de respondentes mostra apenas volume acumulado, sem ranking entre
+  edições;
+- os demais gráficos que poderiam ser distorcidos pelo tamanho da amostra
+  exibem participação percentual dentro de cada edição;
+- nenhuma leitura afirma queda, crescimento ou fechamento de 2025–2026 contra
+  uma edição completa.
 
 O processamento dos dados é feito com **PySpark**:
 
@@ -67,4 +81,3 @@ locais.
 | Miguel Fernandes Martins de Bastos | RM373815 | miguelbastospro@gmail.com |
 | Thanael Butewicz | RM373935 | zthanaelbutewicz@hotmail.com |
 | Veronica de Fatima Machado Silva | RM371976 | v.machado10@hotmail.com |
-

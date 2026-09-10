@@ -2,9 +2,15 @@
 
 ## Objetivo
 
-Gerar indicadores Gold comparando as edições 2023, 2024 e 2025 da pesquisa
+Gerar indicadores Gold para as edições 2023, 2024 e 2025–2026 da pesquisa
 State of Data Brasil, usando PySpark para o processamento e Pillow para a
-apresentação visual.
+apresentação visual. A edição 2025–2026 permanece parcial e não pode ser
+comparada por volume bruto com as edições encerradas.
+
+Os indicadores comparativos usam percentuais dentro de cada edição sempre
+que a contagem absoluta seria afetada pelo fechamento pendente. O volume de
+respondentes é apresentado como acumulado observado, sem classificar a
+edição parcial como maior ou menor.
 
 ## Fluxo do código
 

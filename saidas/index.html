@@ -3,19 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gráficos Gold — três anos</title>
+  <meta name="description" content="Dashboards Gold com 2023 e 2024 encerrados e 2025–2026 em coleta parcial.">
+  <title>Dashboards Gold — três edições</title>
   <style>
-    body { margin: 32px; background: #f8fafc; color: #183557; font-family: Segoe UI, Arial, sans-serif; }
-    h1 { margin-bottom: 4px; }
-    p { color: #607080; }
-    section { margin: 34px 0; }
-    h2 { font-size: 20px; text-transform: capitalize; }
-    img { max-width: 100%; height: auto; display: block; border: 1px solid #dae1e8; }
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; background: #f7f9fc; color: #172b4d; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 48px 32px 72px; background: #f7f9fc; }
+    main { max-width: 1520px; margin: 0 auto; }
+    .hero { padding: 30px 34px 26px; background: #fff; border: 1px solid #e5eaf2; border-radius: 26px; box-shadow: 0 12px 28px rgba(32, 63, 102, .06); }
+    .eyebrow { color: #2684ff; font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+    h1 { margin: 10px 0 8px; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: -.03em; }
+    p { margin: 0; color: #667085; font-size: 16px; line-height: 1.5; }
+    .notice { margin-top: 12px; color: #8a5a00; font-size: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 28px; margin-top: 34px; }
+    article { padding: 18px; background: #fff; border: 1px solid #e5eaf2; border-radius: 22px; box-shadow: 0 10px 24px rgba(32, 63, 102, .05); }
+    .section-head { padding: 2px 6px 15px; }
+    h2 { margin: 7px 0 0; font-size: 18px; line-height: 1.2; }
+    img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid #e5eaf2; }
+    @media (max-width: 620px) { body { padding: 20px 14px 40px; } .grid { grid-template-columns: 1fr; gap: 18px; } article { padding: 10px; } }
   </style>
 </head>
 <body>
-  <h1>Gráficos Gold — State of Data Brasil</h1>
-  <p>Comparação entre 2023, 2024 e 2025. Respostas únicas usadas: 14,002.</p>
-  <section><h2>01 Respondentes Por Ano</h2><img src="01_respondentes_por_ano.png" alt="01 Respondentes Por Ano"></section><section><h2>02 Funcoes E Niveis</h2><img src="02_funcoes_e_niveis.png" alt="02 Funcoes E Niveis"></section><section><h2>03 Faixa Salarial Por Nivel</h2><img src="03_faixa_salarial_por_nivel.png" alt="03 Faixa Salarial Por Nivel"></section><section><h2>04 Perfil Regional</h2><img src="04_perfil_regional.png" alt="04 Perfil Regional"></section><section><h2>05 Diversidade Genero Senioridade</h2><img src="05_diversidade_genero_senioridade.png" alt="05 Diversidade Genero Senioridade"></section><section><h2>06 Tecnologias Principais</h2><img src="06_tecnologias_principais.png" alt="06 Tecnologias Principais"></section><section><h2>07 Adocao Prioridade Ia</h2><img src="07_adocao_prioridade_ia.png" alt="07 Adocao Prioridade Ia"></section><section><h2>08 Motivos Nao Ia Resultados Llm</h2><img src="08_motivos_nao_ia_resultados_llm.png" alt="08 Motivos Nao Ia Resultados Llm"></section>
+  <main>
+    <header class="hero">
+      <div class="eyebrow">STATE OF DATA BRASIL  /  CAMADA GOLD</div>
+      <h1>Dashboards de dados — três edições em perspectiva</h1>
+      <p>2023 e 2024 encerrados · 2025–2026 em coleta parcial · respostas únicas usadas: 14.002.</p>
+      <p class="notice">* 2025–2026 = coleta parcial; o acumulado atual não é comparável ao volume final de 2023 e 2024.</p>
+    </header>
+    <div class="grid"><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Respondentes acumulados por edição</h2></div><img src="01_respondentes_por_ano.png" alt="Respondentes acumulados por edição"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Funções e níveis profissionais</h2></div><img src="02_funcoes_e_niveis.png" alt="Funções e níveis profissionais"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Faixa salarial por nível</h2></div><img src="03_faixa_salarial_por_nivel.png" alt="Faixa salarial por nível"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Perfil regional dos respondentes</h2></div><img src="04_perfil_regional.png" alt="Perfil regional dos respondentes"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Diversidade de gênero por senioridade</h2></div><img src="05_diversidade_genero_senioridade.png" alt="Diversidade de gênero por senioridade"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Tecnologias mais citadas</h2></div><img src="06_tecnologias_principais.png" alt="Tecnologias mais citadas"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Adoção e prioridade de IA</h2></div><img src="07_adocao_prioridade_ia.png" alt="Adoção e prioridade de IA"></article><article><div class="section-head"><span class="eyebrow">CAMADA GOLD</span><h2>Motivos para não usar IA e resultados com LLMs</h2></div><img src="08_motivos_nao_ia_resultados_llm.png" alt="Motivos para não usar IA e resultados com LLMs"></article></div>
+  </main>
 </body>
 </html>

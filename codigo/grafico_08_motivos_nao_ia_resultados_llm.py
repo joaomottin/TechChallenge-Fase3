@@ -3,10 +3,15 @@
 from pathlib import Path
 
 from codigo.comum import (
-    PALETA,
+    ANO_EDICAO_PARCIAL,
+    AVISO_EDICAO_PARCIAL,
+    LARANJA,
+    VERDE,
+    converter_para_percentuais,
     criar_canvas,
     desenhar_aviso,
     desenhar_barras_horizontais,
+    rotulo_ano,
     rodape,
     salvar,
 )
@@ -16,6 +21,7 @@ from codigo.spark_comum import (
     contagens_por_ano,
     obter_dados,
     padronizar_resultado_col,
+    respondentes_por_ano,
 )
 
 
@@ -33,37 +39,65 @@ PADROES_MOTIVOS = [
 def gerar(df=None, pasta_saida: Path | None = None) -> Path:
     df, spark_proprio = obter_dados(df, "GoldGrafico08MotivosIA")
     anos_pesquisa = anos(df)
-    motivos = contagens_padrao_por_ano(
+    motivos_contagem = contagens_padrao_por_ano(
         df,
         "q3_g_motivos_para_nao_usar_ai_generativa_e_llm",
         PADROES_MOTIVOS,
         5,
     )
-    resultados = contagens_por_ano(
+    resultados_contagem = contagens_por_ano(
         df,
         "q3_h_empresa_esta_conseguindo_ter_bons_resultados_com_llms",
         padronizar_resultado_col,
         5,
         ("Não informado",),
     )
-    maior_motivo = max((valor for itens in motivos.values() for _, valor in itens), default=1)
+    totais_ano = respondentes_por_ano(df)
+    motivos = {
+        ano: converter_para_percentuais(itens, totais_ano.get(ano, 0))
+        for ano, itens in motivos_contagem.items()
+    }
+    resultados = {
+        ano: converter_para_percentuais(itens, totais_ano.get(ano, 0))
+        for ano, itens in resultados_contagem.items()
+    }
+    motivo_parcial = motivos.get(ANO_EDICAO_PARCIAL, [])[0][0] if motivos.get(ANO_EDICAO_PARCIAL) else "o motivo mais citado"
 
     imagem, draw = criar_canvas(
-        "Motivos para não usar IA e resultados com LLMs — três anos",
-        "Os motivos são comparados nas três edições. A parte de resultados deixa explícito quando a pergunta não existia ou não tinha respostas naquele ano.",
-        altura=1100,
+        "Motivos para não usar IA e resultados com LLMs — participação por edição",
+        f"As barras mostram o percentual de respondentes que citou cada resposta; no recorte parcial, {motivo_parcial.lower()} lidera as barreiras.",
+        altura=1000,
+        indice=8,
     )
-    caixas_motivos = [(55, 190, 535, 695), (555, 190, 1035, 695), (1055, 190, 1535, 695)]
+    caixas_motivos = [(55, 220, 545, 615), (575, 220, 1065, 615), (1095, 220, 1545, 615)]
     for ano, caixa in zip(anos_pesquisa, caixas_motivos):
-        desenhar_barras_horizontais(draw, caixa, motivos[ano], f"Motivos — {ano}", cor=PALETA[2], maximo=maior_motivo, tamanho_rotulo=14)
+        desenhar_barras_horizontais(
+            draw,
+            caixa,
+            motivos[ano],
+            f"Motivos — {rotulo_ano(ano, detalhado=True)}",
+            cor=LARANJA,
+            percentual=True,
+            maximo=100,
+            tamanho_rotulo=14,
+        )
 
-    caixas_resultados = [(55, 770, 535, 1005), (555, 770, 1035, 1005), (1055, 770, 1535, 1005)]
+    caixas_resultados = [(55, 650, 545, 900), (575, 650, 1065, 900), (1095, 650, 1545, 900)]
     for ano, caixa in zip(anos_pesquisa, caixas_resultados):
         if resultados[ano]:
-            desenhar_barras_horizontais(draw, caixa, resultados[ano], f"Resultados com LLMs — {ano}", cor=PALETA[4], tamanho_rotulo=14)
+            desenhar_barras_horizontais(
+                draw,
+                caixa,
+                resultados[ano],
+                f"Resultados com LLMs — {rotulo_ano(ano, detalhado=True)}",
+                cor=VERDE,
+                percentual=True,
+                maximo=100,
+                tamanho_rotulo=14,
+            )
         else:
-            desenhar_aviso(draw, caixa, f"Resultados com LLMs — {ano}", "Pergunta não disponível ou sem respostas registradas nesta edição.")
-    rodape(draw, "Uma pessoa pode marcar mais de um motivo; por isso os motivos não somam 100%. A ausência de resultado em um ano é informação do próprio questionário.", altura=1100)
+            desenhar_aviso(draw, caixa, f"Resultados com LLMs — {rotulo_ano(ano, detalhado=True)}", "Pergunta não disponível ou sem respostas registradas nesta edição.")
+    rodape(draw, f"Motivos podem ser múltiplos e por isso não somam 100%; percentuais usam o total de respondentes da edição. {AVISO_EDICAO_PARCIAL}")
     caminho = salvar(imagem, "08_motivos_nao_ia_resultados_llm.png", pasta_saida)
     if spark_proprio is not None:
         spark_proprio.stop()
