@@ -1,4 +1,4 @@
-"""Reproduz localmente os oito gráficos Gold.
+"""Reproduz localmente os nove gráficos Gold.
 
 A execução principal do pipeline foi realizada na AWS, com S3, Glue e Athena.
 Este ponto de entrada é a reprodução local: inicia um Spark local e lê o
@@ -30,9 +30,10 @@ from codigo.grafico_05_diversidade_genero_senioridade import gerar as gerar_05
 from codigo.grafico_06_tecnologias_principais import gerar as gerar_06
 from codigo.grafico_07_adocao_prioridade_ia import gerar as gerar_07
 from codigo.grafico_08_motivos_nao_ia_resultados_llm import gerar as gerar_08
+from codigo.grafico_09_modelo_trabalho import gerar as gerar_09
 
 
-GERADORES = [gerar_01, gerar_02, gerar_03, gerar_04, gerar_05, gerar_06, gerar_07, gerar_08]
+GERADORES = [gerar_01, gerar_02, gerar_03, gerar_04, gerar_05, gerar_06, gerar_07, gerar_08, gerar_09]
 ENTRADA_DOCUMENTADA = "dados/state_of_data_gold_export.csv"
 SAIDA_DOCUMENTADA = "saidas/"
 
@@ -65,6 +66,7 @@ def criar_index(caminhos: list[Path], pasta_saida: Path, quantidade: int) -> Non
         "06_tecnologias_principais": "Tecnologias mais citadas",
         "07_adocao_prioridade_ia": "Adoção e prioridade de IA",
         "08_motivos_nao_ia_resultados_llm": "Motivos para não usar IA e resultados com LLMs",
+        "09_modelo_trabalho": "Modelo de trabalho — perguntas distintas por edição",
     }
     itens = []
     for caminho in caminhos:
@@ -134,7 +136,8 @@ Execução: PySpark local, fora da AWS.
 Evidências da execução AWS: ../AWS/ (S3, Glue e Athena).
 Este relatório é uma reprodução local; não é uma saída gerada pelo job Glue.
 
-Cada gráfico tem um script próprio. O arquivo gerar_todos.py executa todos.
+São gerados nove gráficos Gold, cada um com um script próprio. O gráfico 09 separa as perguntas de modelo ideal (2023–2024) da intenção diante do retorno ao presencial (2025–2026). O arquivo gerar_todos.py executa todos.
+No gráfico 09, “híbrido ou remoto” é uma única alternativa da pesquisa de 2025–2026; as proporções dessa edição não devem ser comparadas diretamente às de 2023–2024.
 As comparações entre edições usam percentuais sempre que o volume bruto seria afetado pela coleta parcial.
 {AVISO_EDICAO_PARCIAL}
 O repositório contém a versão reproduzível para o público. Para executar,

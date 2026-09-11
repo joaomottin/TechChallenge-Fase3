@@ -12,7 +12,8 @@ Execução: PySpark local, fora da AWS.
 Evidências da execução AWS: ../AWS/ (S3, Glue e Athena).
 Este relatório é uma reprodução local; não é uma saída gerada pelo job Glue.
 
-Cada gráfico tem um script próprio. O arquivo gerar_todos.py executa todos.
+São gerados nove gráficos Gold, cada um com um script próprio. O gráfico 09 separa as perguntas de modelo ideal (2023–2024) da intenção diante do retorno ao presencial (2025–2026). O arquivo gerar_todos.py executa todos.
+No gráfico 09, “híbrido ou remoto” é uma única alternativa da pesquisa de 2025–2026; as proporções dessa edição não devem ser comparadas diretamente às de 2023–2024.
 As comparações entre edições usam percentuais sempre que o volume bruto seria afetado pela coleta parcial.
 * 2025–2026 = coleta parcial; o acumulado atual não é comparável ao volume final de 2023 e 2024.
 O repositório contém a versão reproduzível para o público. Para executar,

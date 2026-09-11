@@ -33,7 +33,7 @@ AWS: S3 Bronze → Glue → S3 Silver → Glue → S3 Gold → Athena/validaçã
                                                 │
                                                 └─ export da base de respondentes preparada
                                                        │
-VS Code: export CSV → PySpark local → 8 análises → Pillow → PNG/HTML
+VS Code: export CSV → PySpark local → 9 análises → Pillow → PNG/HTML
 ```
 
 Na reprodução local:
@@ -51,7 +51,7 @@ Na reprodução local:
 ## Arquivos para apresentar
 
 - `codigo/spark_comum.py`: processamento PySpark compartilhado;
-- `codigo/grafico_01` a `codigo/grafico_08`: análises independentes;
+- `codigo/grafico_01` a `codigo/grafico_09`: análises independentes;
 - `gerar_todos.py`: execução consolidada;
 - `requirements.txt`: bibliotecas necessárias;
 - `AWS/`: evidências estáticas da execução na AWS;

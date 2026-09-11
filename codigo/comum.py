@@ -687,6 +687,7 @@ def criar_canvas(
     altura: int = 1000,
     indice: str | int | None = None,
     periodo: str | None = None,
+    total_paineis: int = 9,
 ) -> tuple[Image.Image, ImageDraw.ImageDraw]:
     imagem = Image.new("RGB", (1600, altura), FUNDO)
     draw = ImageDraw.Draw(imagem)
@@ -703,7 +704,13 @@ def criar_canvas(
     # Identificação útil para a apresentação, sem competir com o título.
     if indice is not None:
         draw.rounded_rectangle((1390, 54, 1526, 96), radius=21, fill=(240, 235, 255))
-        draw.text((1458, 75), f"PAINEL {int(indice):02d} / 08", font=fonte(11, True), fill=ROXO, anchor="mm")
+        draw.text(
+            (1458, 75),
+            f"PAINEL {int(indice):02d} / {int(total_paineis):02d}",
+            font=fonte(11, True),
+            fill=ROXO,
+            anchor="mm",
+        )
         periodo_texto = periodo or PERIODO_PADRAO
         periodo_fonte = _fonte_ajustada(periodo_texto, 156, 11, 9, True)
         draw.text((1458, 124), periodo_texto, font=periodo_fonte, fill=MUTED, anchor="mm")

@@ -26,7 +26,7 @@ S3 / Bronze ── AWS Glue ──> S3 / Silver ── AWS Glue ──> S3 / Gol
                                                        └─ validação dos produtos
                                                                │
                                                                ▼
-                              PySpark local ── 8 análises ── Pillow ── PNGs/HTML
+                              PySpark local ── 9 análises ── Pillow ── PNGs/HTML
 ```
 
 As capturas que documentam essa execução ficam em `AWS/`:
@@ -55,6 +55,8 @@ O Spark valida as colunas-chave, remove duplicidades por
 `ano_pesquisa + id_resposta`, padroniza categorias e calcula as métricas.
 Um novo export autorizado pode substituir o arquivo para atualizar as saídas.
 
+Fonte pública da pesquisa: [Data Hackers no Kaggle](https://www.kaggle.com/datahackers/datasets).
+
 | Valor em `ano_pesquisa` | Edição apresentada | Situação |
 |---|---|---|
 | `2023` | 2023–2024 | Encerrada |
@@ -81,6 +83,7 @@ Os PNGs e o relatório navegável ficam em `saidas/`:
 | `06_tecnologias_principais.png` | Tecnologias mais citadas |
 | `07_adocao_prioridade_ia.png` | Adoção e prioridade de IA |
 | `08_motivos_nao_ia_resultados_llm.png` | Barreiras ao uso de IA e resultados com LLMs |
+| `09_modelo_trabalho.png` | Modelo de trabalho: perguntas distintas por edição |
 
 Também são gerados `00_previa_tres_anos.png`, `index.html` e `LEIA-ME.txt`.
 
@@ -101,7 +104,7 @@ python -m codigo.grafico_06_tecnologias_principais
 ```
 
 O código compartilhado está em `codigo/spark_comum.py` e `codigo/comum.py`;
-os oito módulos `codigo/grafico_*.py` implementam as análises individuais.
+os nove módulos `codigo/grafico_*.py` implementam as análises individuais.
 
 ## Estrutura principal
 

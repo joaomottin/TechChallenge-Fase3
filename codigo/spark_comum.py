@@ -310,6 +310,22 @@ def padronizar_regiao_col(coluna: str | Column) -> Column:
     )
 
 
+def padronizar_modelo_trabalho_col(coluna: str | Column) -> Column:
+    """Preserva as opções originais, sem misturar perguntas de edições distintas."""
+    s = normalizar_col(coluna)
+    return (
+        F.when(s == "", "Não informado")
+        .when(s.contains("vou aceitar") & s.contains("100% presencial"), "Aceitar e retornar ao modelo 100% presencial")
+        .when(s.contains("vou procurar") & s.contains("hibrido ou remoto"), "Procurar oportunidade no modelo híbrido ou remoto")
+        .when(s.contains("vou procurar") & s.contains("100% remoto"), "Procurar oportunidade no modelo 100% remoto")
+        .when(s.contains("hibrido flexivel"), "Modelo híbrido flexível")
+        .when(s.contains("hibrido com dias fixos"), "Modelo híbrido com dias fixos")
+        .when(s.contains("100% remoto"), "Modelo 100% remoto")
+        .when(s.contains("100% presencial"), "Modelo 100% presencial")
+        .otherwise(F.substring(texto_col(coluna), 1, 32))
+    )
+
+
 def padronizar_salario_col(coluna: str | Column) -> Column:
     s = normalizar_col(coluna)
     primeiro_valor = F.regexp_replace(
