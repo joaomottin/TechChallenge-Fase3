@@ -9,8 +9,11 @@ O projeto tem duas partes relacionadas:
   preparada na AWS, usando PySpark para o processamento e Pillow para gerar os
   PNGs.
 
-Os scripts locais reproduzem as análises, mas não são os jobs originais do Glue,
-não consultam a AWS em tempo real e não alteram a infraestrutura.
+Os scripts locais em `codigo/` reproduzem as análises a partir do snapshot
+autorizado. As cópias dos scripts executados no Glue e os artefatos de
+tratamento usados pelo grupo ficam preservados, respectivamente, em
+`aws_pipeline/` e `tratamento_dados/`. A execução local não consulta a AWS em
+tempo real nem altera a infraestrutura.
 
 ## Arquitetura
 
@@ -40,6 +43,23 @@ As capturas que documentam essa execução ficam em `AWS/`:
 | `S3-Gold.png` | Produtos analíticos Gold e pasta de gráficos |
 | `Glue.png` | Jobs Glue de processamento |
 | `Athena.png` | Catálogo e consulta de validação |
+
+## Tratamento e scripts do pipeline
+
+Os artefatos que explicam a preparação da base estão separados do código dos
+gráficos:
+
+- `tratamento_dados/01_pipeline_tratamento_consolidacao.ipynb`: notebook
+  PySpark/Colab com profiling, validação, limpeza, padronização e consolidação
+  das três edições;
+- `tratamento_dados/02_crosswalk_manual.csv`: crosswalk manual com 457 linhas,
+  usado para alinhar os cabeçalhos equivalentes entre 2023, 2024 e 2025–2026;
+- `aws_pipeline/`: scripts e exports dos jobs AWS Glue, organizados por etapa
+  Bronze, Silver, Gold e publicação dos gráficos.
+
+O notebook documenta o tratamento original do grupo. Já a execução local
+documentada abaixo parte do export autorizado em `dados/` para que os gráficos
+possam ser reproduzidos sem credenciais AWS.
 
 ## Dados e regra de leitura
 
@@ -110,8 +130,10 @@ os nove módulos `codigo/grafico_*.py` implementam as análises individuais.
 
 ```text
 AWS/                    evidências visuais da execução AWS
+aws_pipeline/           scripts e exports dos jobs AWS Glue por etapa
 codigo/                 processamento Spark e módulos dos gráficos
 dados/                  export de entrada e documentação da base
+tratamento_dados/       notebook e crosswalk do tratamento original
 saidas/                 PNGs, HTML e relatório local
 docs/                   mapa da entrega e auditoria
 gerar_todos.py          execução consolidada

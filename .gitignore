@@ -22,3 +22,4 @@ env/
 *.csv
 *.parquet
 !dados/state_of_data_gold_export.csv
+!tratamento_dados/02_crosswalk_manual.csv

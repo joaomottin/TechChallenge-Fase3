@@ -11,8 +11,10 @@ AWS Glue para o processamento e Athena/Glue Catalog para consultas e
 validações. As capturas em `../AWS/` registram o bucket, os prefixos, os jobs
 Glue e uma consulta Athena concluída.
 
-Os scripts/configurações originais dos jobs Glue não estão nesta pasta. As
-imagens são evidências do ambiente AWS; não são lidas pelo código local.
+As cópias dos scripts e exports dos jobs Glue ficam em `../aws_pipeline/`,
+organizadas por camada. O notebook e o crosswalk usados no tratamento original
+ficam em `../tratamento_dados/`. As imagens continuam sendo evidências do
+ambiente AWS; não são lidas pelo código local.
 
 ## Objetivo da reprodução local
 
@@ -55,6 +57,9 @@ Na reprodução local:
 - `gerar_todos.py`: execução consolidada;
 - `requirements.txt`: bibliotecas necessárias;
 - `AWS/`: evidências estáticas da execução na AWS;
+- `aws_pipeline/`: scripts e exports dos jobs Glue por etapa;
+- `tratamento_dados/`: notebook PySpark e crosswalk manual usados na
+  preparação da base;
 - `saidas/`: evidências visuais geradas;
 - `README.md`: instruções de execução.
 
@@ -64,6 +69,14 @@ O arquivo `dados/state_of_data_gold_export.csv` é um snapshot autorizado, em
 nível de respondente, da base corrigida/preparada na AWS. Ele é a entrada da
 reprodução local; não é um arquivo Bronze, não é uma das tabelas Gold
 agregadas consultadas no Athena e não é uma consulta ao vivo.
+
+O tratamento que antecede esse snapshot está documentado em
+`tratamento_dados/01_pipeline_tratamento_consolidacao.ipynb` e usa o
+`tratamento_dados/02_crosswalk_manual.csv` para alinhar manualmente os
+cabeçalhos equivalentes das três edições. O job correspondente preservado em
+`aws_pipeline/02_silver_tratamento/job_silver_corrigido.py` é a versão executada
+no Glue; o notebook é a documentação reproduzível do raciocínio e das
+validações.
 
 Os caminhos AWS reais ficam nas configurações dos jobs. O formato genérico é:
 
@@ -76,7 +89,9 @@ gold_produto = "s3://<bucket-do-projeto>/gold/<produto>/"
 Na execução local, `gerar_todos.py` lê sempre
 `dados/state_of_data_gold_export.csv`. A função `carregar_dados_spark` aceita
 uma URI `s3://` para eventual reutilização em um ambiente Glue, mas o comando
-documentado nesta pasta é local e não substitui os jobs originais.
+documentado nesta pasta é local e não substitui os jobs originais. Os exports
+JSON em `aws_pipeline/` mantêm também a configuração dos jobs e o campo
+`script` entregue pelo Glue Studio.
 
 Esta reprodução não executa os jobs Glue, não consulta Athena, não grava no
 S3 e não altera a infraestrutura AWS. Credenciais, chaves, tokens e
