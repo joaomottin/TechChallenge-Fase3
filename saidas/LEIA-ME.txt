@@ -1,13 +1,21 @@
 GRÁFICOS GOLD — TRÊS EDIÇÕES
 
-Entrada: C:\Users\joaop\Downloads\run-1788912744607-part-r-00000
-Saída: C:\Users\joaop\OneDrive\Área de Trabalho\FIAP\Fase 3\graficos_gold_3_anos\saidas
+Entrada: dados/state_of_data_gold_export.csv
+Saída: saidas/
 Período: 2023  ·  2024  ·  2025–2026*
 Respostas únicas: 14002
 Motor de dados: PySpark (Spark local)
 Renderização: Pillow
 
+Origem dos dados: export CSV da base preparada na AWS.
+Execução: PySpark local, fora da AWS.
+Evidências da execução AWS: ../AWS/ (S3, Glue e Athena).
+Este relatório é uma reprodução local; não é uma saída gerada pelo job Glue.
+
 Cada gráfico tem um script próprio. O arquivo gerar_todos.py executa todos.
 As comparações entre edições usam percentuais sempre que o volume bruto seria afetado pela coleta parcial.
 * 2025–2026 = coleta parcial; o acumulado atual não é comparável ao volume final de 2023 e 2024.
-A AWS não é alterada por estes scripts locais.
+O repositório contém a versão reproduzível para o público. Para executar,
+obtenha uma cópia pública/autorizada do export e salve-a em
+dados/state_of_data_gold_export.csv.
+Nenhuma credencial, bucket privado ou alteração na AWS é necessária.

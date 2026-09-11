@@ -1,11 +1,32 @@
-"""Funções Spark compartilhadas pelos gráficos Gold locais.
+"""Funções Spark compartilhadas pela reprodução local dos gráficos Gold.
 
-O Spark executa a leitura do CSV Silver, a limpeza da chave, a deduplicação,
-as padronizações semânticas e as agregações analíticas. O módulo ``comum``
-continua sendo usado apenas para desenhar os PNGs com Pillow.
+O Spark lê uma base de respondentes preparada na AWS, limpa a chave, remove
+duplicidades, padroniza categorias e calcula as agregações analíticas. O
+módulo ``comum`` continua sendo usado apenas para desenhar os PNGs com Pillow.
 
-Assim, os scripts podem ser executados fora da AWS e ainda demonstram a
-mesma abordagem de PySpark usada nos jobs do AWS Glue.
+## Por que este arquivo aceita dois tipos de caminho?
+
+Os gráficos foram ajustados para serem demonstrados e reproduzidos fora da
+AWS, a partir de um export em nível de respondente gerado durante o pipeline
+AWS. Por isso, no uso local, o Spark lê sempre o arquivo:
+
+    dados/state_of_data_gold_export.csv
+
+Essa escolha permite que qualquer pessoa que clone o repositório consiga
+executar o processamento com uma cópia autorizada do export, sem configurar
+credenciais AWS.
+
+Dentro da AWS, a mesma função também consegue receber uma URI S3 quando for
+reutilizada em um job Glue. O caminho abaixo é apenas um exemplo ilustrativo;
+o bucket e os prefixos reais continuam sendo os configurados no ambiente AWS:
+
+    caminho_base_aws = "s3://<bucket-do-projeto>/silver/<base-corrigida>/"
+    df = carregar_dados_spark(spark, caminho_base_aws)
+
+Assim, ``Path`` representa o export quando a execução é local e ``s3://``
+representa uma origem que pode ser usada em um ambiente Glue. Esta versão não
+substitui os jobs AWS nem altera o bucket; ela apenas reproduz localmente as
+análises para facilitar a auditoria e a execução pelo GitHub.
 """
 
 from __future__ import annotations
@@ -21,7 +42,7 @@ from pyspark.sql import Column, DataFrame, SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
-from codigo.comum import INPUT_PADRAO, OUTPUT_PADRAO
+from codigo.comum import INPUT_PADRAO
 
 
 NORMALIZAR_DE = "áàãâäéêëíîïóôõöúûüç"
@@ -98,21 +119,43 @@ def normalizar_col(coluna: str | Column) -> Column:
     return F.regexp_replace(valor, r"\s+", " ")
 
 
+def _origem_spark(caminho: str | Path) -> str:
+    """Valida uma origem local ou preserva uma URI remota para o Spark.
+
+    A verificação ``Path.exists()`` é feita somente em arquivos locais. Uma
+    URI ``s3://`` deve ser resolvida pelo conector do Spark disponível no AWS
+    Glue, e não pelo sistema de arquivos do computador que executa este
+    repositório.
+    """
+    origem = str(caminho)
+    if origem.startswith(("s3://", "s3a://")):
+        return origem
+
+    caminho_local = Path(caminho)
+    if not caminho_local.exists():
+        raise FileNotFoundError(f"CSV não encontrado: {caminho_local}")
+    return str(caminho_local)
+
+
 def carregar_dados_spark(
     spark: SparkSession,
-    caminho: Path | None = None,
+    caminho: str | Path | None = None,
 ) -> DataFrame:
-    """Lê a Silver CSV e aplica a preparação comum às três edições."""
+    """Lê o export local ou uma base em S3 e prepara as três edições.
+
+    Em execução local, ``caminho`` normalmente é um ``Path`` para o export
+    CSV. Em um job Glue, pode ser uma URI como
+    ``s3://<bucket>/silver/<base-corrigida>/``.
+    """
     entrada = caminho or INPUT_PADRAO
-    if not entrada.exists():
-        raise FileNotFoundError(f"CSV não encontrado: {entrada}")
+    origem = _origem_spark(entrada)
 
     df = (
         spark.read
         .option("header", "true")
         .option("inferSchema", "true")
         .option("multiLine", "true")
-        .csv(str(entrada))
+        .csv(origem)
     )
     obrigatorias = {"ano_pesquisa", "id_resposta"}
     ausentes = obrigatorias.difference(df.columns)
@@ -260,7 +303,7 @@ def padronizar_regiao_col(coluna: str | Column) -> Column:
         F.when(s == "sudeste", "Sudeste")
         .when(s == "sul", "Sul")
         .when(s == "nordeste", "Nordeste")
-        .when(s == "centro oeste", "Centro-Oeste")
+        .when(s.isin("centro oeste", "centro-oeste"), "Centro-Oeste")
         .when(s == "norte", "Norte")
         .when(s == "", "Não informado")
         .otherwise(texto_col(coluna))
@@ -325,8 +368,11 @@ def padronizar_resultado_col(coluna: str | Column) -> Column:
     s = normalizar_col(coluna)
     return (
         F.when(s == "", "Não informado")
+        .when(s == "nao informado", "Não informado")
         .when(s.contains("nao sei"), "Não sabe opinar")
         .when(s.contains("parcial") | s.contains("alguns"), "Parcialmente")
+        .when(s.contains("fase de investigacao") | s.contains("investigacao e planejamento"), "Não — em investigação")
+        .when(s.contains("ainda nao comecamos") | s.contains("nenhum projeto"), "Não — não iniciado")
         .when(s.startswith("sim") | s.contains("bons resultados"), "Sim")
         .when(s.startswith("nao"), "Não")
         .otherwise(F.substring(texto_col(coluna), 1, 22))

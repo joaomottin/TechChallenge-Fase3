@@ -15,6 +15,10 @@ env/
 *.log
 *.tmp
 
-# Dados brutos locais; os gráficos usam o caminho configurado por STATE_DATA_CSV
+# Dados de entrada locais. A execução documentada usa
+# dados/state_of_data_gold_export.csv.
+# Se houver autorização para distribuir o snapshot da entrega, ele pode ser
+# incluído explicitamente neste caminho:
 *.csv
 *.parquet
+!dados/state_of_data_gold_export.csv

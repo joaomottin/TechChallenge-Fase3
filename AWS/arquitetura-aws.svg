@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-234 -5 2178 1128" role="img" aria-labelledby="title desc">
+<title id="title">State of Data Brasil — fluxo final de Engenharia de Dados e Analytics</title>
+<desc id="desc">Arquitetura AWS com S3, Glue, Silver, Gold, Athena e reprodução local dos indicadores.</desc>
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#486581" flood-opacity="0.18"/></filter></defs>
+<rect x="-234" y="-5" width="2178.0" height="1128.0" fill="#FFFFFF"/>
+<path d="M 260.0,300.0 L 310.0,300.0" fill="none" stroke="#334E68" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="310.0,300.0 302.2,304.5 302.2,295.5" fill="#334E68"/>
+<path d="M 490.0,300.0 L 540.0,300.0" fill="none" stroke="#334E68" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="540.0,300.0 532.2,304.5 532.2,295.5" fill="#334E68"/>
+<path d="M 720.0,300.0 L 810.0,300.0" fill="none" stroke="#334E68" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="810.0,300.0 802.2,304.5 802.2,295.5" fill="#334E68"/>
+<path d="M 990.0,300.0 L 1065.0,300.0" fill="none" stroke="#334E68" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1065.0,300.0 1057.2,304.5 1057.2,295.5" fill="#334E68"/>
+<path d="M 1245.0,300.0 L 1340.0,300.0" fill="none" stroke="#7E57C2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1340.0,300.0 1332.2,304.5 1332.2,295.5" fill="#7E57C2"/>
+<rect x="1257.5" y="284.0" width="70.0" height="16" rx="4" fill="#FFFFFF" opacity="0.92"/>
+<text x="1292.5" y="295.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#5E3A8A" text-anchor="middle">ler Silver</text>
+<path d="M 630.0,390.0 L 630.0,430.0 L 558.4,430.0 L 512.3,490.8" fill="none" stroke="#7E57C2" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 513.4,481.9 L 512.3,490.8 L 520.6,487.3" fill="none" stroke="#7E57C2" stroke-width="1.5"/>
+<path d="M 1155.0,390.0 L 1155.0,430.0 L 650.0,430.0 L 650.0,470.0 L 603.9,470.0 L 539.0,489.8" fill="none" stroke="#7E57C2" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 545.2,483.2 L 539.0,489.8 L 547.8,491.8" fill="none" stroke="#7E57C2" stroke-width="1.5"/>
+<path d="M 660.0,590.0 L 750.0,590.0" fill="none" stroke="#7E57C2" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 742.2,594.5 L 750.0,590.0 L 742.2,585.5" fill="none" stroke="#7E57C2" stroke-width="1.5"/>
+<rect x="673.1" y="574.0" width="63.8" height="16" rx="4" fill="#FFFFFF" opacity="0.92"/>
+<text x="705.0" y="585.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#5E3A8A" text-anchor="middle">metadados</text>
+<path d="M 400.0,390.0 L 400.0,430.0 L 190.0,430.0 L 190.0,490.0" fill="none" stroke="#C2185B" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 185.5,482.2 L 190.0,490.0 L 194.5,482.2" fill="none" stroke="#C2185B" stroke-width="1.5"/>
+<path d="M 1240.0,590.0 L 1340.0,590.0" fill="none" stroke="#334E68" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1340.0,590.0 1332.2,594.5 1332.2,585.5" fill="#334E68"/>
+<path d="M 1520.0,300.0 L 1150.0,490.0" fill="none" stroke="#7E57C2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1150.0,490.0 1154.9,482.4 1159.0,490.4" fill="#7E57C2"/>
+<rect x="1296.9" y="379.0" width="76.2" height="16" rx="4" fill="#FFFFFF" opacity="0.92"/>
+<text x="1335.0" y="390.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#5E3A8A" text-anchor="middle">gravar Gold</text>
+<path d="M 1150.0,690.0 L 1150.0,720.0 L 525.0,720.0 L 525.0,690.0" fill="none" stroke="#7E57C2" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 529.5,697.8 L 525.0,690.0 L 520.5,697.8" fill="none" stroke="#7E57C2" stroke-width="1.5"/>
+<path d="M 1060.0,590.0 L 970.0,590.0" fill="none" stroke="#1E88E5" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<path d="M 977.8,585.5 L 970.0,590.0 L 977.8,594.5" fill="none" stroke="#1E88E5" stroke-width="1.5"/>
+<path d="M 1520.0,590.0 L 1630.0,590.0" fill="none" stroke="#1565C0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1630.0,590.0 1622.2,594.5 1622.2,585.5" fill="#1565C0"/>
+<rect x="1533.8" y="574.0" width="82.4" height="16" rx="4" fill="#FFFFFF" opacity="0.92"/>
+<text x="1575.0" y="585.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#0B5A86" text-anchor="middle">storytelling</text>
+<path d="M -65.0,300.0 L 80.0,300.0" fill="none" stroke="#334E68" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="80.0,300.0 72.2,304.5 72.2,295.5" fill="#334E68"/>
+<rect x="-15.1" y="284.0" width="45.2" height="16" rx="4" fill="#FFFFFF" opacity="0.92"/>
+<text x="7.5" y="295.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#334E68" text-anchor="middle">upload</text>
+<text x="40.0" y="50.8" font-family="Arial, sans-serif" font-size="28.0px" font-weight="700" fill="#102A43" text-anchor="start">State of Data Brasil | Fluxo final de Engenharia de Dados e Analytics</text>
+<text x="40.0" y="85.2" font-family="Arial, sans-serif" font-size="15.0px" font-weight="400" fill="#627D98" text-anchor="start">AWS Academy Lab - us-east-1 | Bronze e Silver com limpeza auditada | Gold e gráficos gerados via AWS Glue Studio Notebook (Jupyter + Spark)</text>
+<rect x="50.0" y="110.0" width="1770.0" height="970.0" rx="12" fill="#F8FAFC" stroke="#9FB3C8" stroke-width="2"/>
+<text x="64.0" y="600.8" font-family="Arial, sans-serif" font-size="16.0px" font-weight="700" fill="#243B53" text-anchor="start">AWS Cloud | AWS Academy Lab</text>
+<rect x="80.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#EAF7EA" stroke="#3F8624" stroke-width="2" filter="url(#shadow)"/>
+<text x="94.0" y="254.8" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#173A1A" text-anchor="start">1. Amazon S3</text>
+<text x="94.0" y="271.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">Landing / Raw</text>
+<text x="94.0" y="288.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">3 CSVs originais</text>
+<text x="94.0" y="304.7" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">457 linhas de</text>
+<text x="94.0" y="321.3" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">manifesto + checksum</text>
+<text x="94.0" y="338.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">Prefixo por</text>
+<text x="94.0" y="354.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#173A1A" text-anchor="start">fonte/edição</text>
+<rect x="310.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#FFF4E5" stroke="#FF9900" stroke-width="2" filter="url(#shadow)"/>
+<text x="324.0" y="246.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#6B3D00" text-anchor="start">2. AWS Glue Job 01</text>
+<text x="324.0" y="263.1" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Landing -&gt; Bronze</text>
+<text x="324.0" y="279.7" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Spark / PySpark</text>
+<text x="324.0" y="296.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Lê os CSVs com</text>
+<text x="324.0" y="313.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">schema fixo</text>
+<text x="324.0" y="329.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Remove nulos e</text>
+<text x="324.0" y="346.3" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">adiciona metadados de</text>
+<text x="324.0" y="362.9" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#6B3D00" text-anchor="start">origem</text>
+<rect x="540.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#EAF7EA" stroke="#3F8624" stroke-width="2" filter="url(#shadow)"/>
+<text x="554.0" y="265.9" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#173A1A" text-anchor="start">3. Amazon S3 Bronze</text>
+<text x="554.0" y="281.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">14.005 registros</text>
+<text x="554.0" y="296.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Preserva os valores</text>
+<text x="554.0" y="312.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">originais</text>
+<text x="554.0" y="327.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Parquet + coluna</text>
+<text x="554.0" y="342.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">ano_pesquisa + origem</text>
+<rect x="810.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#FFF4E5" stroke="#FF9900" stroke-width="2" filter="url(#shadow)"/>
+<text x="824.0" y="258.2" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#6B3D00" text-anchor="start">4. AWS Glue Job 02</text>
+<text x="824.0" y="273.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Bronze -&gt; Silver</text>
+<text x="824.0" y="289.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Junta as 3 pesquisas +</text>
+<text x="824.0" y="304.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">normaliza nomes</text>
+<text x="824.0" y="319.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Remove duplicatas por</text>
+<text x="824.0" y="335.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">qualidade</text>
+<text x="824.0" y="350.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B3D00" text-anchor="start">Une por ano_pesquisa</text>
+<rect x="1065.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#EAF7EA" stroke="#2E7D32" stroke-width="3" filter="url(#shadow)"/>
+<text x="1079.0" y="250.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#173A1A" text-anchor="start">5. Amazon S3 Silver</text>
+<text x="1079.0" y="265.9" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">14.002 linhas x 488</text>
+<text x="1079.0" y="281.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">colunas</text>
+<text x="1079.0" y="296.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">2023: 5.293</text>
+<text x="1079.0" y="312.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">2024: 5.215</text>
+<text x="1079.0" y="327.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">2025-2026: 3.494</text>
+<text x="1079.0" y="342.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Parquet + CSV +</text>
+<text x="1079.0" y="358.1" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">dicionário</text>
+<rect x="1340.0" y="210.0" width="180.0" height="180.0" rx="12" fill="#F3E8FF" stroke="#7E57C2" stroke-width="3" filter="url(#shadow)"/>
+<text x="1354.0" y="240.6" font-family="Arial, sans-serif" font-size="11.0px" font-weight="700" fill="#3C1E70" text-anchor="start">6. AWS Glue Studio</text>
+<text x="1354.0" y="254.7" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Notebook</text>
+<text x="1354.0" y="268.8" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Jupyter +</text>
+<text x="1354.0" y="282.8" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Spark/PySpark/SQL</text>
+<text x="1354.0" y="296.9" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Lê o Silver</text>
+<text x="1354.0" y="311.0" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Define grupos e</text>
+<text x="1354.0" y="325.1" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">denominadores</text>
+<text x="1354.0" y="339.2" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Calcula KPIs por tema/ano</text>
+<text x="1354.0" y="353.2" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Gera tabelas Gold +</text>
+<text x="1354.0" y="367.3" font-family="Arial, sans-serif" font-size="11.0px" font-weight="400" fill="#3C1E70" text-anchor="start">gráficos (PNG/SVG)</text>
+<rect x="80.0" y="490.0" width="220.0" height="200.0" rx="12" fill="#FCE8F3" stroke="#C2185B" stroke-width="2" filter="url(#shadow)"/>
+<text x="94.0" y="563.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#6B1238" text-anchor="start">Amazon CloudWatch</text>
+<text x="94.0" y="579.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B1238" text-anchor="start">Logs dos Glue Jobs e do</text>
+<text x="94.0" y="594.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B1238" text-anchor="start">notebook</text>
+<text x="94.0" y="609.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B1238" text-anchor="start">Métricas, erros, duração e</text>
+<text x="94.0" y="625.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#6B1238" text-anchor="start">run_id</text>
+<rect x="390.0" y="490.0" width="270.0" height="200.0" rx="12" fill="#F3E8FF" stroke="#7E57C2" stroke-width="2" filter="url(#shadow)"/>
+<text x="404.0" y="553.1" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#3C1E70" text-anchor="start">AWS Glue Data Catalog</text>
+<text x="404.0" y="569.7" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#3C1E70" text-anchor="start">database: fiap_techchallenge3_2026</text>
+<text x="404.0" y="586.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Tabelas bronze_,</text>
+<text x="404.0" y="603.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#3C1E70" text-anchor="start">silver_consolidado, gold_</text>
+<text x="404.0" y="619.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Schemas e partições por</text>
+<text x="404.0" y="636.3" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#3C1E70" text-anchor="start">ano_pesquisa</text>
+<rect x="750.0" y="490.0" width="220.0" height="200.0" rx="12" fill="#E8F4FD" stroke="#1E88E5" stroke-width="2" filter="url(#shadow)"/>
+<text x="764.0" y="571.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#0B3B68" text-anchor="start">Amazon Athena</text>
+<text x="764.0" y="586.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">Consultas ad hoc para</text>
+<text x="764.0" y="602.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">conferência</text>
+<text x="764.0" y="617.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">Reconciliação Silver/Gold</text>
+<rect x="1340.0" y="490.0" width="180.0" height="200.0" rx="12" fill="#E8F4FD" stroke="#1565C0" stroke-width="2" filter="url(#shadow)"/>
+<text x="1354.0" y="548.2" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#0B3B68" text-anchor="start">8. Artefatos analíticos</text>
+<text x="1354.0" y="563.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">s3://.../analytics/</text>
+<text x="1354.0" y="579.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">Gráficos em alta</text>
+<text x="1354.0" y="594.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">resolução + tabelas CSV</text>
+<text x="1354.0" y="609.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">de apoio</text>
+<text x="1354.0" y="625.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">Notebook executado com</text>
+<text x="1354.0" y="640.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#0B3B68" text-anchor="start">os parâmetros usados</text>
+<rect x="755.0" y="755.0" width="400.0" height="150.0" rx="12" fill="#FAF5FF" stroke="#7E57C2" stroke-width="2" filter="url(#shadow)"/>
+<text x="769.0" y="811.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#3C1E70" text-anchor="start">Gate de qualidade - Gold (obrigatório)</text>
+<text x="769.0" y="826.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Cada KPI documentado por tabela</text>
+<text x="769.0" y="842.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Numerador ≤ denominador, percentuais entre 0-100%</text>
+<text x="769.0" y="857.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#3C1E70" text-anchor="start">Totais batem com Silver</text>
+<rect x="1190.0" y="755.0" width="330.0" height="150.0" rx="12" fill="#F4F7FA" stroke="#78909C" stroke-width="2" filter="url(#shadow)"/>
+<text x="1204.0" y="811.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#334E68" text-anchor="start">Controles transversais</text>
+<text x="1204.0" y="826.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#334E68" text-anchor="start">Região us-east-1, IAM com privilégio mínimo</text>
+<text x="1204.0" y="842.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#334E68" text-anchor="start">S3 privado, buckets criptografados</text>
+<text x="1204.0" y="857.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#334E68" text-anchor="start">Sem segredos no notebook</text>
+<rect x="80.0" y="940.0" width="1440.0" height="90.0" rx="12" fill="#FFFFFF" stroke="#9FB3C8" stroke-width="2"/>
+<text x="94.0" y="981.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#334E68" text-anchor="start">Status e ordem de execução: [AUDITADO] dados + lógica Silver -&gt; [1] materializar Landing/Bronze/Silver no S3 com Glue Jobs -&gt; [2] construir Gold + gráficos no Glue Studio Notebook -&gt; [3] montar</text>
+<text x="94.0" y="998.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#334E68" text-anchor="start">PowerPoint/PDF</text>
+<rect x="50.0" y="109.0" width="0.0" height="0.0" rx="2" fill="#FFFFFF" stroke="#9FB3C8" stroke-width="1.5"/>
+<text x="64.0" y="113.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#102A43" text-anchor="start">Gráficos</text>
+<rect x="1060.0" y="490.0" width="180.0" height="200.0" rx="12" fill="#EAF7EA" stroke="#7E57C2" stroke-width="3" filter="url(#shadow)"/>
+<text x="1074.0" y="548.2" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#173A1A" text-anchor="start">7. Amazon S3 Gold</text>
+<text x="1074.0" y="563.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Perfil, remuneração,</text>
+<text x="1074.0" y="579.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">diversidade</text>
+<text x="1074.0" y="594.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Tecnologia e IA</text>
+<text x="1074.0" y="609.7" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Região e trabalho</text>
+<text x="1074.0" y="625.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">remoto</text>
+<text x="1074.0" y="640.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Parquet + CSV</text>
+<rect x="1630.0" y="485.0" width="160.0" height="210.0" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadow)"/>
+<text x="1644.0" y="511.5" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#0D3C61" text-anchor="start">9. Material</text>
+<text x="1644.0" y="528.1" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">executivo</text>
+<text x="1644.0" y="544.8" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">PowerPoint ou PDF</text>
+<text x="1644.0" y="561.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">PDF com gráficos</text>
+<text x="1644.0" y="578.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">selecionados</text>
+<text x="1644.0" y="594.7" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">insights e</text>
+<text x="1644.0" y="611.3" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">tendências</text>
+<text x="1644.0" y="628.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">recomendações</text>
+<text x="1644.0" y="644.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">estratégicas</text>
+<text x="1644.0" y="661.2" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">arquitetura AWS</text>
+<text x="1644.0" y="677.9" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#0D3C61" text-anchor="start">fontes/metodologia</text>
+<rect x="80.0" y="755.0" width="620.0" height="150.0" rx="12" fill="#EEF8F0" stroke="#2E7D32" stroke-width="2" filter="url(#shadow)"/>
+<text x="94.0" y="811.3" font-family="Arial, sans-serif" font-size="12.0px" font-weight="700" fill="#173A1A" text-anchor="start">Gate de qualidade - Bronze/Silver (auditado)</text>
+<text x="94.0" y="826.6" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Entrada = 14.005 | Silver = 14.002 × 488</text>
+<text x="94.0" y="842.0" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Cobertura do crosswalk = 100%</text>
+<text x="94.0" y="857.4" font-family="Arial, sans-serif" font-size="12.0px" font-weight="400" fill="#173A1A" text-anchor="start">Duplicatas removidas = 3 no total</text>
+<rect x="-210.0" y="195.0" width="145.0" height="210.0" rx="12" fill="#FFFFFF" stroke="#334E68" stroke-width="2" filter="url(#shadow)"/>
+<text x="-196.0" y="229.8" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#102A43" text-anchor="start">0. Fonte</text>
+<text x="-196.0" y="246.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">auditada</text>
+<text x="-196.0" y="263.1" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">Data Hackers /</text>
+<text x="-196.0" y="279.7" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">Kaggle</text>
+<text x="-196.0" y="296.4" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">2023: 5.293 ×</text>
+<text x="-196.0" y="313.0" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">399 2024: 5.217</text>
+<text x="-196.0" y="329.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">× 403 2025-2026:</text>
+<text x="-196.0" y="346.3" font-family="Arial, sans-serif" font-size="13.0px" font-weight="700" fill="#102A43" text-anchor="start">3.495 × 388</text>
+<text x="-196.0" y="362.9" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">14.005 linhas</text>
+<text x="-196.0" y="379.6" font-family="Arial, sans-serif" font-size="13.0px" font-weight="400" fill="#102A43" text-anchor="start">brutas</text>
+</svg>

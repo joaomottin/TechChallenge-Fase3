@@ -1,9 +1,16 @@
-"""Funções visuais compartilhadas pelos gráficos locais.
+"""Funções visuais compartilhadas pela reprodução dos gráficos Gold.
 
-Os scripts atuais usam ``spark_comum.py`` para leitura, limpeza, deduplicação
-e agregação com PySpark. Este módulo concentra as funções de desenho com
-Pillow e mantém funções antigas de apoio para compatibilidade; elas não são
-chamadas pelo ``gerar_todos.py`` atual. A AWS não é alterada por estes arquivos.
+O processamento principal fica em ``spark_comum.py`` e usa um snapshot em
+nível de respondente da base preparada na AWS. Aqui ficam as funções de
+apresentação com Pillow e algumas funções antigas de apoio, mantidas por
+compatibilidade.
+
+Este repositório foi organizado para permitir a execução fora da AWS, no VS
+Code, sem depender de credenciais ou de um bucket acessível. Em produção, o
+job AWS Glue mantém as camadas e os caminhos S3 configurados no ambiente AWS.
+Os arquivos deste diretório reproduzem localmente a etapa de análise e
+visualização a partir do export da base preparada, sem alterar a infraestrutura
+AWS.
 """
 
 from __future__ import annotations
@@ -21,12 +28,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 PASTA_SCRIPTS = Path(__file__).resolve().parent
 PASTA_PROJETO = PASTA_SCRIPTS.parent
-INPUT_PADRAO = Path(
-    os.environ.get(
-        "STATE_DATA_CSV",
-        r"C:\Users\joaop\Downloads\run-1788912744607-part-r-00000",
-    )
-)
+PASTA_DADOS = PASTA_PROJETO / "dados"
+
+# A fonte local é fixa e auditável: todos os gráficos devem ler o export
+# disponibilizado nesta pasta, sem depender de variáveis de ambiente ou de um
+# caminho externo à entrega.
+INPUT_PADRAO = PASTA_DADOS / "state_of_data_gold_export.csv"
 OUTPUT_PADRAO = Path(
     os.environ.get("STATE_DATA_OUTPUT", str(PASTA_PROJETO / "saidas"))
 )
@@ -273,6 +280,7 @@ def padronizar_regiao(valor: object) -> str:
         "sul": "Sul",
         "nordeste": "Nordeste",
         "centro oeste": "Centro-Oeste",
+        "centro-oeste": "Centro-Oeste",
         "norte": "Norte",
     }
     return mapa.get(s, texto(valor) or "Não informado")
@@ -347,10 +355,16 @@ def padronizar_resultado(valor: object) -> str:
     s = normalizar(valor)
     if not s:
         return "Não informado"
+    if s == "nao informado":
+        return "Não informado"
     if "nao sei" in s:
         return "Não sabe opinar"
     if "parcial" in s or "alguns" in s:
         return "Parcialmente"
+    if "fase de investigacao" in s or "investigacao e planejamento" in s:
+        return "Não — em investigação"
+    if "ainda nao comecamos" in s or "nenhum projeto" in s:
+        return "Não — não iniciado"
     if s.startswith("sim") or "bons resultados" in s:
         return "Sim"
     if s.startswith("nao"):
@@ -732,18 +746,22 @@ def desenhar_barras_horizontais(
     percentual: bool = False,
     maximo: float | None = None,
     tamanho_rotulo: int = 16,
+    subtitulo: str | None = None,
 ) -> None:
     x0, y0, x1, y1 = caixa
     desenhar_cartao(draw, caixa)
     draw.text((x0 + 20, y0 + 18), texto(titulo), font=_fonte_ajustada(titulo, x1 - x0 - 40, 18, 15, True), fill=NAVY)
-    draw.text((x0 + 20, y0 + 46), "participação" if percentual else "respondentes", font=fonte(12), fill=MUTED)
+    texto_subtitulo = subtitulo or ("participação" if percentual else "respondentes")
+    draw.text((x0 + 20, y0 + 46), texto(texto_subtitulo), font=fonte(12), fill=MUTED)
     itens = list(itens)
     if not itens:
         draw.text((x0 + 20, y0 + 105), "Sem dados suficientes", font=fonte(15), fill=MUTED)
         return
 
     topo, base = y0 + 84, y1 - 24
-    altura_linha = max(36.0, (base - topo) / len(itens))
+    # Cartões compactos podem ter cinco categorias; nesse caso, reduzir o
+    # espaçamento mínimo evita que a última linha ultrapasse o cartão.
+    altura_linha = max(28.0, (base - topo) / len(itens))
     largura_rotulo = min(220, max(145, int((x1 - x0) * 0.41)))
     inicio_barra, fim_barra, coluna_valor = x0 + largura_rotulo + 30, x1 - 72, x1 - 18
     maior = float(maximo or max(float(valor) for _, valor in itens) or 1)

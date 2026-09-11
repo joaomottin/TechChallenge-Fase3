@@ -1,9 +1,17 @@
-"""Executa os oito gráficos locais com 2023, 2024 e 2025–2026 parcial.
+"""Reproduz localmente os oito gráficos Gold.
+
+A execução principal do pipeline foi realizada na AWS, com S3, Glue e Athena.
+Este ponto de entrada é a reprodução local: inicia um Spark local e lê o
+snapshot/export da base de respondentes preparada na AWS em
+``dados/state_of_data_gold_export.csv``. O arquivo serve de entrada para
+recalcular os indicadores Gold; ele não é uma tabela Gold agregada do Athena.
+Ele não é o script original do Glue, não usa credenciais, não grava no bucket
+e não altera os jobs AWS.
 
 Uso no VS Code:
     python gerar_todos.py
 
-Para usar outro CSV, defina STATE_DATA_CSV antes de executar.
+Atualize o export em ``dados/state_of_data_gold_export.csv`` antes de executar.
 """
 
 from __future__ import annotations
@@ -25,6 +33,8 @@ from codigo.grafico_08_motivos_nao_ia_resultados_llm import gerar as gerar_08
 
 
 GERADORES = [gerar_01, gerar_02, gerar_03, gerar_04, gerar_05, gerar_06, gerar_07, gerar_08]
+ENTRADA_DOCUMENTADA = "dados/state_of_data_gold_export.csv"
+SAIDA_DOCUMENTADA = "saidas/"
 
 
 def criar_previa(caminhos: list[Path], pasta_saida: Path) -> Path:
@@ -112,17 +122,25 @@ def main() -> None:
         criar_index(caminhos, pasta_saida, quantidade)
         leia_me = f"""GRÁFICOS GOLD — TRÊS EDIÇÕES
 
-Entrada: {INPUT_PADRAO}
-Saída: {pasta_saida}
+Entrada: {ENTRADA_DOCUMENTADA}
+Saída: {SAIDA_DOCUMENTADA}
 Período: {PERIODO_PADRAO}
 Respostas únicas: {quantidade}
 Motor de dados: PySpark (Spark local)
 Renderização: Pillow
 
+Origem dos dados: export CSV da base preparada na AWS.
+Execução: PySpark local, fora da AWS.
+Evidências da execução AWS: ../AWS/ (S3, Glue e Athena).
+Este relatório é uma reprodução local; não é uma saída gerada pelo job Glue.
+
 Cada gráfico tem um script próprio. O arquivo gerar_todos.py executa todos.
 As comparações entre edições usam percentuais sempre que o volume bruto seria afetado pela coleta parcial.
 {AVISO_EDICAO_PARCIAL}
-A AWS não é alterada por estes scripts locais.
+O repositório contém a versão reproduzível para o público. Para executar,
+obtenha uma cópia pública/autorizada do export e salve-a em
+dados/state_of_data_gold_export.csv.
+Nenhuma credencial, bucket privado ou alteração na AWS é necessária.
 """
         (pasta_saida / "LEIA-ME.txt").write_text(leia_me, encoding="utf-8")
         print(f"Entrada: {INPUT_PADRAO}")
